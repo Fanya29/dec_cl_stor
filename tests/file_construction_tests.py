@@ -1,1 +1,1 @@
-from algorithms/file_construction
+from algorithms.file_construction import *
