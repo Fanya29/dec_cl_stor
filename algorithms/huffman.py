@@ -1,8 +1,9 @@
-from bin_tree import *
-from sort import sort
+from algorithms.bin_tree import *
+from algorithms.sort import sort
 
 def archive(file_code):
-    tree_table = _frequency_table(file_code.hex())
+    tree_table = _frequency_table(file_code)
+    return _table_replaces(tree_table, file_code)
 
 def unarchieve():
     pass
@@ -19,11 +20,33 @@ def _binary_tree(table):
     for char in table:
         nodes_dict.append(create(char, table[char]))
     root_node = _nodes_compare(nodes_dict)
-    return _get_table(root_node)
+    _set_numerical(root_node)
+    return _get_table(nodes_dict)
 
 def _nodes_compare(nodes):
     while len(nodes) != 1:
-        del nodes.append(compare(nodes[0], nodes[1]))[0:2]
+        nodes.append(compare(nodes[0], nodes[1]))
+        nodes = nodes[2:]
+        if len(nodes) > 1:
+            sort(nodes)
     return nodes[0]
 
-def _get_table(node):
+def _set_numerical(node):
+    node.left.numeric += '0'
+    if node.left.left != None:
+        _set_numerical(node.left)
+    node.right.numeric += '1'
+    if node.right.right != None:
+        _set_numerical(node.right)
+
+def _get_table(nodes):
+    table = {}
+    for node in nodes:
+        table[node.data] = node.numeric
+    return table
+
+def _table_replaces(table, data):
+    new_data = ''
+    for i in range(len(data) - 1):
+        new_data += table[data[i] + data[i+1]]
+    return new_data

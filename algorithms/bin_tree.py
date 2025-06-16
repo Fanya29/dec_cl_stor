@@ -7,6 +7,7 @@ def create(data=None, value=None, right=None, left=None):
     a.value = value
     a.right = right
     a.left = left
+    a.numeric = ''
     return a
 
 def compare(node1, node2):
