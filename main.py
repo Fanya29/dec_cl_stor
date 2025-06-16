@@ -3,8 +3,7 @@ from algorithms.huffman import *
 from tests.rc4_test import *
 
 file_path = '/Users/mac/PycharmProjects/dec_cl_stor/test_files/DSC06359.ARW'
+file_name = (file_path.split('/')[-1]).split('.')[0]
 
-# old_data = file2b(path=file_path).hex()
-# print(len(old_data))
-# data = archive(old_data)
-# print(len(data))
+data = archive(file2b(path=file_path).hex(), file_name)
+print(len(data))

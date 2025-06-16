@@ -1,12 +1,18 @@
 from algorithms.bin_tree import *
 from algorithms.sort import sort
+from algorithms.file_construction import *
 
-def archive(file_code):
+def archive(file_code, file_name):
     tree_table = _frequency_table(file_code)
+    create_config(tree_table, file_name)
     return _table_replaces(tree_table, file_code)
 
-def unarchieve():
-    pass
+def unarchieve(file_code, file_name):
+    data = ''
+    table = get_config(file_name)
+    data = _table_replaces(table, file_code)
+    b2file(data, file_name)
+
 
 def _frequency_table(code):
     a = {}
@@ -47,6 +53,18 @@ def _get_table(nodes):
 
 def _table_replaces(table, data):
     new_data = ''
-    for i in range(len(data) - 1):
-        new_data += table[data[i] + data[i+1]]
+    j = 0
+    for i in range(1, len(data)):
+        if data[j:i] in table:
+            new_data += table[data[j:i]]
+            i, j = i-1
     return new_data
+
+
+def _reverse_table(table):
+    new_table = {}
+    for el in table:
+        new_table[table[el]] = el
+    return new_table
+
+
