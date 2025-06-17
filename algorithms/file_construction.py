@@ -6,8 +6,10 @@ def file2b(name, extantion):
 
 def b2file(data, file_name, extantion):
     a = open(f'/Users/mac/PycharmProjects/dec_cl_stor/test_files/{file_name}.{extantion}', 'wb')
-    byte_data = bytes.fromhex(data)
-    a.write(byte_data)
+    if type(data) != str:
+        a.write(data)
+    else:
+        a.write(bytes.fromhex(data))
 
 def create_config(data, file_name):
     file = open(f'/Users/mac/PycharmProjects/dec_cl_stor/config_files/{file_name}_data.json', 'w', encoding='utf-8')

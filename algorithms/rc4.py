@@ -1,3 +1,5 @@
+from algorithms.file_construction import *
+
 def rc4(key, data):
     S = _key_schedule(key)
     keystream = _psuedo_random_generation(S)
@@ -11,7 +13,6 @@ def _key_schedule(key):
         S[i], S[j] = S[j], S[i]
     return S
 
-
 def _psuedo_random_generation(S):
     i = j = 0
     while True:
@@ -20,3 +21,11 @@ def _psuedo_random_generation(S):
         S[i], S[j] = S[j], S[i]
         K = S[(S[i] + S[j]) % 256]
         yield K
+
+def crypt(path):
+    metadatas = ((path.split('/'))[-1]).split('.')
+    data = file2b(metadatas[0], metadatas[1])
+    print('Введите ключ для шифрования')
+    crypted_data = rc4(input().encode(), data)
+    b2file(crypted_data, metadatas[0], metadatas[1])
+    print('Шифрование завершено')

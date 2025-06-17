@@ -1,6 +1,5 @@
 from algorithms.bin_tree import *
 from algorithms.file_construction import *
-from algorithms.rc4 import *
 from algorithms.encoder import *
 
 def archive(path):
