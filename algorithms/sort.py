@@ -1,5 +1,5 @@
 def sort(nodes):
-    i = 1
-    while nodes[-1].value > nodes[i].value or len(nodes) != i + 1:
-        i += 1
-    nodes[i], nodes[-1] = nodes[-1], nodes[i]
+    for i in range(len(nodes) - 1, 0, -1):
+        if nodes[i].value >= nodes[i - 1].value:
+            break
+        nodes[i], nodes[i-1] = nodes[i-1], nodes[i]

@@ -1,9 +1,19 @@
-from algorithms.file_construction import *
+from algorithms.rc4 import *
 from algorithms.huffman import *
-from tests.rc4_test import *
+from communication.communication import *
 
-file_path = '/Users/mac/PycharmProjects/dec_cl_stor/test_files/DSC06359.ARW'
-file_name = (file_path.split('/')[-1]).split('.')[0]
 
-data = archive(file2b(path=file_path).hex(), file_name)
-print(len(data))
+meeting()
+while True:
+    answer = str(input())
+
+    if answer == 'команды':
+        get_command()
+    elif answer == 'архивировать':
+        archive(str(input()))
+    elif answer == 'разархивировать':
+        unarchieve(str(input()))
+    elif answer == 'выйти':
+        break
+    else:
+        print('Такой команды нет, чтобы узнать о функционале введи: команды')
